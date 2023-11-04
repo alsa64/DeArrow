@@ -48,19 +48,8 @@ waitFor(() => Config.isReady()).then(() => {
             // If there is no userID, then it is the first install.
             if (!userID){
                 const groupPolicyLicenseKey = await getGroupPolicyLicenseKey();
-                const paywallEnabled = !CompileConfig["freeAccess"]
-                    && !navigator.userAgent.includes("Mobile;")
-                    && !navigator.userAgent.includes("iPhone;")
-                    && !navigator.userAgent.includes("iPad;")
-                    && await isPaywallEnabled()
-                    && !groupPolicyLicenseKey
-                    && !Config.config!.licenseKey
-                    && !Config.config!.alreadyActivated;
-                if (paywallEnabled) {
-                    Config.config!.activated = false;
-                    Config.config!.showActivatedMessage = true;
-                    Config.config!.freeActivation = false;
-                } else if (groupPolicyLicenseKey) {
+                const paywallEnabled = false
+                if (groupPolicyLicenseKey) {
                     Config.config!.licenseKey = groupPolicyLicenseKey;
                     Config.config!.freeActivation = false;
                 }
